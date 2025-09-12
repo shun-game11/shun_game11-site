@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu Header</title>
+    <style>
+        /* CSSコードをここに記述 */
+        
+        /* リセット・共通スタイル */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* ヘッダー全体 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2px;
+            background-color: lightgreen;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-logo a {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* PC用ナビゲーション */
+        .pc-nav {
+            display: none;
+        }
+        
+        @media screen and (min-width: 768px) {
+            .pc-nav {
+                display: block;
+            }
+        
+            .pc-nav ul {
+                display: flex;
+                gap: 40px;
+            }
+        
+            .pc-nav a {
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+        
+            .pc-nav a:hover {
+                color: #007bff;
+            }
+        }
+        
+        /* ハンバーガーボタン */
+        .hamburger-btn {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 200;
+        }
+        
+        @media screen and (min-width: 768px) {
+            .hamburger-btn {
+                display: none;
+            }
+        }
+        
+        .line {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #333;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        
+        .line-top { top: 12px; }
+        .line-middle { top: 50%; transform: translate(-50%, -50%); }
+        .line-bottom { bottom: 12px; }
+        
+        .hamburger-btn.is-open .line-top {
+            transform: translateX(-50%) rotate(45deg);
+            top: 50%;
+        }
+        
+        .hamburger-btn.is-open .line-middle {
+            opacity: 0;
+        }
+        
+        .hamburger-btn.is-open .line-bottom {
+            transform: translateX(-50%) rotate(-45deg);
+            bottom: 50%;
+        }
+        
+        /* SP用ナビゲーション */
+        .sp-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 150;
+            overflow-y: auto;
+        }
+        
+        .sp-nav.is-open {
+            transform: translateX(0);
+        }
+        
+        .sp-nav ul {
+            text-align: center;
+        }
+        
+        .sp-nav li {
+            margin-bottom: 30px;
+        }
+        
+        .sp-nav a {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            display: block;
+        }
+        
+        /* メインコンテンツ */
+        .content {
+            margin-top: 80px; /* ヘッダーの高さ分、コンテンツを下にずらす */
+            padding: 20px;
+            height: 200vh; /* スクロール確認用 */
+            background-color: lightgreen;
+        }
+
+        .bw {
+            width: 90vw;
+            height: 200vh;
+            background-color: aliceblue;
+            border-radius: 25px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <h1 class="site-logo"><a href="/">shun_game11</a></h1>
+            
+            <nav class="nav pc-nav">
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/link">LINK</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <button class="hamburger-btn" aria-controls="sp-nav" aria-expanded="false">
+                <span class="line line-top"></span>
+                <span class="line line-middle"></span>
+                <span class="line line-bottom"></span>
+            </button>
+            
+            <nav class="nav sp-nav" id="sp-nav">
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/link">LINK</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="bw">
+
+        </div>
+    </main>
+
+    <script>
+        // JavaScriptコードをここに記述
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.querySelector('.hamburger-btn');
+            const spNav = document.querySelector('.sp-nav');
+        
+            // ハンバーガーボタンがクリックされたときの処理
+            hamburgerBtn.addEventListener('click', () => {
+                const isOpened = hamburgerBtn.classList.toggle('is-open');
+                spNav.classList.toggle('is-open');
+        
+                // aria-expanded属性を更新
+                hamburgerBtn.setAttribute('aria-expanded', isOpened);
+        
+                // ハンバーガーメニューが開いているときはスクロールを無効化
+                document.body.style.overflow = isOpened ? 'hidden' : 'auto';
+            });
+        
+            // メニュー項目をクリックしたらメニューを閉じる
+            spNav.querySelectorAll('a').forEach(LINK => {
+                LINK.addEventListener('click', () => {
+                    hamburgerBtn.classList.remove('is-open');
+                    spNav.classList.remove('is-open');
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

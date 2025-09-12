@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sg11 公式HP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+    
+    <style>
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2px;
+            background-color: lightgreen;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-logo a {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .pc-nav {
+            display: none;
+        }
+        
+        @media screen and (min-width: 768px) {
+            .pc-nav {
+                display: block;
+            }
+        
+            .pc-nav ul {
+                display: flex;
+                gap: 40px;
+            }
+        
+            .pc-nav a {
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+        
+            .pc-nav a:hover {
+                color: #007bff;
+            }
+        }
+        
+        .hamburger-btn {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 200;
+        }
+        
+        @media screen and (min-width: 768px) {
+            .hamburger-btn {
+                display: none;
+            }
+        }
+        
+        .line {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #333;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        
+        .line-top { top: 12px; }
+        .line-middle { top: 50%; transform: translate(-50%, -50%); }
+        .line-bottom { bottom: 12px; }
+        
+        .hamburger-btn.is-open .line-top {
+            transform: translateX(-50%) rotate(45deg);
+            top: 50%;
+        }
+        
+        .hamburger-btn.is-open .line-middle {
+            opacity: 0;
+        }
+        
+        .hamburger-btn.is-open .line-bottom {
+            transform: translateX(-50%) rotate(-45deg);
+            bottom: 50%;
+        }
+        
+        /* SP用ナビゲーション */
+        .sp-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 150;
+            overflow-y: auto;
+        }
+        
+        .sp-nav.is-open {
+            transform: translateX(0);
+        }
+        
+        .sp-nav ul {
+            text-align: center;
+        }
+        
+        .sp-nav li {
+            margin-bottom: 30px;
+        }
+        
+        .sp-nav a {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            display: block;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            height: 100vh;
+            background-color: lightgreen;
+        }
+
+        .bw {
+            width: 90vw;
+            height: 92vh;
+            background-color: aliceblue;
+            border-radius: 25px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+
+        .bun h3 {
+            font-size: 30px;
+        }
+
+        .bun p {
+            font-size: 20px;
+            margin-top: -20px;
+        }
+
+        .bun a {
+            color: #007bff;
+        }
+
+        .aboutshun img {
+            margin-top: 40px;
+            width: 85vw;
+            background-color: aliceblue;
+            border-radius: 25px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .aboutshun {
+            margin-top: -20px;
+            
+        }
+
+        .asbun {
+            margin-top: -30px;
+            margin-left: 20px;
+        }
+
+        .slink {
+            margin-left: 20px;
+        }
+
+        /* ボタンの基本スタイル */
+        .copy-button {
+            /* 背景色と文字色 */
+            background-color: #4CAF50; /* 落ち着いた緑色 */
+            color: white; /* 白い文字 */
+    
+            /* 余白とパディング */
+            padding: 8px 15px; /* 上下左右の余白 */
+            margin-left: 10px; /* 左側に少しスペース */
+    
+            /* ボーダーと角丸 */
+            border: none; /* ボーダーなし */
+            border-radius: 5px; /* 角を丸くする */
+    
+            /* フォント */
+            font-size: 14px; /* フォントサイズ */
+            font-weight: bold; /* 太字 */
+            cursor: pointer; /* マウスホバーでカーソルをポインターに */
+    
+            /* ホバー時のアニメーション */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* ホバー時の変化を滑らかに */
+        }
+
+        /* ホバー時のスタイル */
+        .copy-button:hover {
+            background-color: #45a049; /* 少し暗い緑色 */
+            transform: translateY(-1px); /* 少し上に浮き上がるような効果 */
+        }
+
+        /* アクティブ（クリック中）のスタイル */
+        .copy-button:active {
+            background-color: #3e8e41; /* さらに暗い緑色 */
+            transform: translateY(0); /* 浮き上がりを戻す */
+        }
+
+        /* フォーカス時のアウトラインをなくし、代替の視覚的なフィードバックを提供 */
+        .copy-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4); /* 緑色の薄いシャドウ */
+        }
+
+        .scontact {
+            margin-left: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <h1 class="site-logo"><a href="/">shun_game11</a></h1>
+            
+            <nav class="nav pc-nav">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> HOME</a></li>
+                    <li><a href="/about"><i class="fas fa-ellipsis-h"></i> ABOUT</a></li>
+                    <li><a href="/link"><i class="fas fa-link"></i> LINK</a></li>
+                    <li><a href="/contact"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <button class="hamburger-btn" aria-controls="sp-nav" aria-expanded="false">
+                <span class="line line-top"></span>
+                <span class="line line-middle"></span>
+                <span class="line line-bottom"></span>
+            </button>
+            
+            <nav class="nav sp-nav" id="sp-nav">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> HOME</a></li>
+                    <li><a href="/about"><i class="fas fa-ellipsis-h"></i> ABOUT</a></li>
+                    <li><a href="/link"><i class="fas fa-link"></i> LINK</a></li>
+                    <li><a href="/contact"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="bw">
+            <div class="bun">
+                <div class="aboutshun">
+                    <img src="img/sg11.png" alt="">
+                    <div class="asbun">
+                        <h3>shun_game11について</h3>
+                        <p>shun_game11は主にyoutubeとdiscordで活動しているゆっくり実況者です。<a href="/about">詳しくはここをクリック</a></p>
+                    </div>
+                    
+                </div>
+                <div class="slink">
+                    <h3>shun_game11の活動場所</h3>
+                    <p><a href="https://www.youtube.com/@shun_game11" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> shun_game11のyoutube</a></p>
+                    <p><a href="https://x.com/shun_game11" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i> shun_game11のX(旧Twitter)</a></p>
+                </div>
+                <div class="scontact">
+                    <h3>shun_game11への連絡方法</h3>
+                    <p>・メール : メールアドレス:未定</p>
+                    <p>・X(旧Twitter)でのDM : <a href="https://x.com/shun_game11" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i> shun_game11のX(旧Twitter)</a></p>
+                    <p>・discordでのDM : shun_game11のdiscordのID: "<span id="discordid-copy">shun_game11</span>"<button id="discordid-copybutton" class="copy-button">（クリックでコピー）</button>    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.querySelector('.hamburger-btn');
+            const spNav = document.querySelector('.sp-nav');
+
+            hamburgerBtn.addEventListener('click', () => {
+                const isOpened = hamburgerBtn.classList.toggle('is-open');
+                spNav.classList.toggle('is-open');
+
+                hamburgerBtn.setAttribute('aria-expanded', isOpened);
+
+                document.body.style.overflow = isOpened ? 'hidden' : 'auto';
+            });
+
+            spNav.querySelectorAll('a').forEach(LINK => {
+                LINK.addEventListener('click', () => {
+                    hamburgerBtn.classList.remove('is-open');
+                    spNav.classList.remove('is-open');
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('discordid-copybutton');
+        const textToCopy = document.getElementById('discordid-copy').textContent; // テキスト内容を取得
+
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Discord IDがコピーされました！');
+                })
+                .catch(err => {
+                    alert('コピーに失敗しました。');
+                    console.error('コピーエラー:', err);
+                });
+    });
+});
+    </script>
+</body>
+</html>
